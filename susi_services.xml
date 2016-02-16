@@ -1,0 +1,437 @@
+<?xml version="1.0"?>
+   <!--
+
+        Copyright AllSeen Alliance. All rights reserved.
+
+           Permission to use, copy, modify, and/or distribute this software for any
+           purpose with or without fee is hereby granted, provided that the above
+           copyright notice and this permission notice appear in all copies.
+
+           THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+           WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+           MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+           ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+           WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+           ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+           OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+  -->
+<controlPanelDevice xmlns="http://www.alljoyn.org/controlpanel/gen">
+    <name>SUSIAccess</name>
+    <headerCode>#include "ControlPanelProvided.h"</headerCode>
+    <languageSet name="myLanguages">
+        <language>en</language>     
+    </languageSet>
+    <controlPanels>
+        <controlPanel languageSet="myLanguages">
+            <rootContainer>
+                <name>ControlPanel</name>
+                <secured>false</secured>
+                <enabled>true</enabled>
+                <bgcolor>0x1e90ff</bgcolor>
+                <hints>
+                    <hint>vertical_linear</hint>
+                    <hint>horizontal_linear</hint>
+                </hints>
+                <elements>
+                		<container>
+                			<name>BoardInfoContainer</name>
+                        <secured>false</secured>
+                        <enabled>true</enabled>
+                        <bgcolor>0x200</bgcolor>
+                        <hints>
+				                    <hint>horizontal_linear</hint>
+                        </hints>  
+												<elements>
+                            <stringProperty>
+                               <name>BoardManufacturerStringProperty</name>
+                               <getCode>getBoardManufacturerString</getCode>
+                               <setCode>setBoardManufacturerString(%s)</setCode>
+				                        <secured>false</secured>
+				                        <enabled>true</enabled>
+                               <writable>false</writable>
+                               <label>
+                                  <value type="literal" language="en">Board Manufacturer: </value>
+                               </label>
+                               <bgcolor>0x500</bgcolor>
+                               <hints>
+                                  <hint>textview</hint>
+                               </hints>                                                              
+                            </stringProperty>
+                            
+                            <stringProperty>
+                               <name>BoardNameStringProperty</name>
+                               <getCode>getBoardNameString</getCode>
+                               <setCode>setBoardNameString(%s)</setCode>
+				                        <secured>false</secured>
+				                        <enabled>true</enabled>
+                               <writable>false</writable>
+                               <label>
+                                  <value type="literal" language="en">Board Name: </value>
+                               </label>
+                               <bgcolor>0x500</bgcolor>
+                               <hints>
+                                  <hint>textview</hint>
+                               </hints>                                                              
+                            </stringProperty>  
+												</elements>                                                       			
+                		</container>
+                		
+                		<container>                            
+                			<name>VersionContainer</name>
+                        <secured>false</secured>
+                        <enabled>true</enabled>
+                        <bgcolor>0x200</bgcolor>
+                        <hints>
+				                    <hint>horizontal_linear</hint>
+                        </hints>  
+												<elements>                            
+                            <stringProperty>
+                               <name>DriverVersionProperty</name>
+                               <getCode>getDriverVersionString</getCode>
+                               <setCode>setDriverVersionString(%s)</setCode>
+				                        <secured>false</secured>
+				                        <enabled>true</enabled>
+                               <writable>false</writable>
+                               <label>
+                                  <value type="literal" language="en">Driver Version: </value>
+                               </label>
+                               <bgcolor>0x500</bgcolor>
+                               <hints>
+                                  <hint>textview</hint>
+                               </hints>                                                              
+                            </stringProperty>
+                            
+                            <stringProperty>
+                               <name>LibraryVersionProperty</name>
+                               <getCode>getLibraryVersionString</getCode>
+                               <setCode>setLibraryVersionString(%s)</setCode>
+				                        <secured>false</secured>
+				                        <enabled>true</enabled>
+                               <writable>false</writable>
+                               <label>
+                                  <value type="literal" language="en">Library Version: </value>
+                               </label>
+                               <bgcolor>0x500</bgcolor>
+                               <hints>
+                                  <hint>textview</hint>
+                               </hints>                                                              
+                            </stringProperty>                                                                                      													
+												</elements>                                                       			
+                		</container>
+                		
+                		<container>
+                			<name>TemperatureContainer</name>
+                        <secured>false</secured>
+                        <enabled>true</enabled>
+                        <bgcolor>0x200</bgcolor>
+                        <hints>
+				                    <hint>horizontal_linear</hint>
+                        </hints>  
+												<elements>
+                            <stringProperty>
+                               <name>TemperatureProperty</name>
+                               <getCode>getCPUTemperatureString</getCode>
+                               <setCode>setCPUTemperatureString(%s)</setCode>
+				                        <secured>false</secured>
+				                        <enabled>true</enabled>
+                               <writable>false</writable>
+                               <label>
+                                  <value type="literal" language="en">CPU Temperature: </value>
+                               </label>
+                               <bgcolor>0x500</bgcolor>
+                               <hints>
+                                  <hint>textview</hint>
+                               </hints>                                                              
+                            </stringProperty>
+                            <booleanProperty>
+																<name>SubscriptionProperty</name>
+																<getCode>getSubscription</getCode>
+																<setCode>setSubscription(%s)</setCode>
+																<secured>false</secured>
+																<enabled>true</enabled>
+																<writable>true</writable>
+																<label>
+																	<value type="literal" language="en">Subscription</value>
+																</label>
+																	<bgcolor>0x500</bgcolor>
+																<hints>
+																	<hint>checkbox</hint>
+																</hints>
+														</booleanProperty>   													
+												</elements>	                		
+                    </container>
+
+                		<container>
+                			<name>DisplayContainer</name>
+                        <secured>false</secured>
+                        <enabled>true</enabled>
+                        <bgcolor>0x200</bgcolor>
+                        <hints>
+				                    <hint>horizontal_linear</hint>
+                        </hints>  
+												<elements>
+                            <scalarProperty dataType="UINT16">
+                               <name>DisplayDeviceProperty</name>
+                               <getCode>getDisplayDevice</getCode>
+                               <setCode>setDisplayDevice(%s)</setCode>
+				                        <secured>false</secured>
+				                        <enabled>true</enabled>
+                               <writable>true</writable>
+                                <label>
+                                    <value type="literal" language="en">Display Devices</value>
+                                </label>
+                                <bgcolor>0xffd700</bgcolor>
+                                <hints>
+                                    <hint>spinner</hint>
+                                </hints>
+                                <constraintDefs>
+                                    <constraintVals>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">HDMI</value>
+                                            </display>
+                                            <value>0</value>
+                                        </constraint>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">VGA</value>
+                                            </display>
+                                            <value>1</value>
+                                        </constraint>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">LVDS_1</value>
+                                            </display>
+                                            <value>2</value>
+                                        </constraint>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">LVDS_2</value>
+                                            </display>
+                                            <value>3</value>
+                                        </constraint>                                                                                                                          
+                                    </constraintVals>
+                                </constraintDefs>                                                                                             
+                            </scalarProperty>    
+                            
+                            <scalarProperty dataType="UINT16">                                                    	
+                                <name>BrightnessProperty</name>
+                                <getCode>getBrightnessValue</getCode>
+                                <setCode>setBrightnessValue(%s)</setCode>
+                                <secured>false</secured>
+                                <enabled>true</enabled>
+                                <writable>true</writable>
+				                        <label>
+				                            <value type="literal" language="en">Brightness</value>
+				                        </label>
+				                        <bgcolor>0x008000</bgcolor>
+				                        <hints>
+				                            <hint>slider</hint>
+				                        </hints>
+				                        <constraintDefs>
+				                            <constraintRange>
+				                                <min>1</min>
+				                                <max>7</max>
+				                                <increment>1</increment >
+				                            </constraintRange>
+				                        </constraintDefs>
+				                        <unitMeasure>
+				                          <value type="literal" language="en">Degrees</value>
+				                        </unitMeasure>
+                            </scalarProperty>
+              			                            										
+                            <scalarProperty dataType="UINT16">
+                               <name>BacklightProperty</name>
+                               <getCode>getBacklightValue</getCode>
+                               <setCode>setBacklightValue(%s)</setCode>
+				                        <secured>false</secured>
+				                        <enabled>true</enabled>
+                               <writable>true</writable>
+                                <label>
+                                    <value type="literal" language="en">Backlight</value>
+                                </label>
+                                <bgcolor>0xffd700</bgcolor>
+                                <hints>
+                                    <hint>radiobutton</hint>
+                                </hints>
+                                <constraintDefs>
+                                    <constraintVals>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">OFF</value>
+                                            </display>
+                                            <value>0</value>
+                                        </constraint>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">ON</value>
+                                            </display>
+                                            <value>1</value>
+                                        </constraint>
+                                    </constraintVals>
+                                </constraintDefs>                                                                                             
+                            </scalarProperty> 					                               													
+												</elements>	                		
+                    </container>
+                    
+                		<container>
+                			<name>GPIOContainer</name>
+                        <secured>false</secured>
+                        <enabled>true</enabled>
+                        <bgcolor>0x200</bgcolor>
+                        <hints>
+				                    <hint>horizontal_linear</hint>
+                        </hints>  
+												<elements>
+                            <scalarProperty dataType="UINT16">
+                               <name>GPIOProperty</name>
+                               <getCode>getGPIOPin</getCode>
+                               <setCode>setGPIOPin(%s)</setCode>
+				                        <secured>false</secured>
+				                        <enabled>true</enabled>
+                               <writable>true</writable>
+                                <label>
+                                    <value type="literal" language="en">GPIO Pin</value>
+                                </label>
+                                <bgcolor>0xffd700</bgcolor>
+                                <hints>
+                                    <hint>spinner</hint>
+                                </hints>
+                                <constraintDefs>
+                                    <constraintVals>                                     
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">GPIO 1</value>
+                                            </display>
+                                            <value>0</value>
+                                        </constraint>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">GPIO 2</value>
+                                            </display>
+                                            <value>1</value>
+                                        </constraint>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">GPIO 3</value>
+                                            </display>
+                                            <value>2</value>
+                                        </constraint>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">GPIO 4</value>
+                                            </display>
+                                            <value>3</value>
+                                        </constraint>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">GPIO 5</value>
+                                            </display>
+                                            <value>4</value>
+                                        </constraint>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">GPIO 6</value>
+                                            </display>
+                                            <value>5</value>
+                                        </constraint>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">GPIO 7</value>
+                                            </display>
+                                            <value>6</value>
+                                        </constraint>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">GPIO 8</value>
+                                            </display>
+                                            <value>7</value>
+                                        </constraint>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">GPIO 9</value>
+                                            </display>
+                                            <value>8</value>
+                                        </constraint>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">GPIO 10</value>
+                                            </display>
+                                            <value>9</value>
+                                        </constraint>                                                                                                                                                                                                                                                   
+                                    </constraintVals>
+                                </constraintDefs>                                                                                             
+                            </scalarProperty>
+                            
+                            <scalarProperty dataType="UINT16">
+                               <name>GPIODirProperty</name>
+                               <getCode>getGPIODirValue</getCode>
+                               <setCode>setGPIODirValue(%s)</setCode>
+				                        <secured>false</secured>
+				                        <enabled>true</enabled>
+                                <writable>true</writable>
+                                <label>
+                                    <value type="literal" language="en">Direction</value>
+                                </label>
+                                <bgcolor>0xffd700</bgcolor>
+                                <hints>
+                                    <hint>radiobutton</hint>
+                                </hints>
+                                <constraintDefs>
+                                    <constraintVals>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">OUT</value>
+                                            </display>
+                                            <value>0</value>
+                                        </constraint>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">IN</value>
+                                            </display>
+                                            <value>1</value>
+                                        </constraint>
+                                    </constraintVals>
+                                </constraintDefs>                                                                                             
+                            </scalarProperty> 	                            
+
+                            <scalarProperty dataType="UINT16">
+                               <name>GPIOLevelProperty</name>
+                               <getCode>getGPIOLevelValue</getCode>
+                               <setCode>setGPIOLevelValue(%s)</setCode>
+				                        <secured>false</secured>
+				                        <enabled>true</enabled>
+                                <writable>true</writable>
+                                <label>
+                                    <value type="literal" language="en">Level</value>
+                                </label>
+                                <bgcolor>0xffd700</bgcolor>
+                                <hints>
+                                    <hint>radiobutton</hint>
+                                </hints>
+                                <constraintDefs>
+                                    <constraintVals>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">LOW</value>
+                                            </display>
+                                            <value>0</value>
+                                        </constraint>
+                                        <constraint>
+                                            <display>
+                                                <value type="literal" language="en">HIGH</value>
+                                            </display>
+                                            <value>1</value>
+                                        </constraint>
+                                    </constraintVals>
+                                </constraintDefs>                                                                                             
+                            </scalarProperty> 												        
+												</elements>														
+                    </container>													        
+                </elements>
+            </rootContainer>
+        </controlPanel>
+    </controlPanels>
+</controlPanelDevice>
+
