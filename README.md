@@ -24,7 +24,7 @@ This Alljoyn application supports
 	``` bash
 	$ export CROSS_PATH=/opt/poky/1.5.1/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi
 	$ export CROSS_PREFIX=arm-poky-linux-gnueabi-
-	\# Set your SUSI4 lib path
+	// Set your SUSI4 lib path
 	$ export SUSI4_PATH=/home/root/Projects/SUSI_4.0/Library/DllSusi4
 	```
 
@@ -59,10 +59,17 @@ Or use AllJoynExplorer on Windows 10.
 To customize ControlPanel properties, you need to generate source codes from XML file again.
 
 1. Modify **susi_services.xml** as your expected.
-2. Copy susi_services.xml into *$AJ_ROOT/services/base_tcl/controlpanel/tools/CPSAppGenerator/SampleXMLs/* folder.
+2. Copy susi_services.xml into ControlPanel tools folder.
+
+	``` bash
+	$ cp susi_services.xml $AJ_ROOT/services/base_tcl/controlpanel/tools/CPSAppGenerator/SampleXMLs/
+	```
+
 3. Run **generateCPSApp.py** to produce the Control Panel Generated code.
+
 	``` bash
 	$ cd $AJ_ROOT/services/base_tcl/controlpanel/tools/CPSAppGenerator
 	$ python generateCPSApp.py -p [output folder] ./SampleXMLs/susi_services.xml
 	```
+
 4. Copy *ControlPanelGenerated.c* and *ControlPanelGenerated.h* from [output folder] to *$AJ_ROOT/services/base_tcl/sample_apps/SusiService* folder.
