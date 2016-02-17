@@ -59,10 +59,10 @@ static const char* ActionsInterface[] =
 {
     ActionsInterfaceName,         /* The first entry is the interface name. */
     "@Version>q",                               /* The Version Property */
-    "?SusiLVDSSetGPIO6High",
-    "?SusiLVDSSetGPIO6LOW",
     "?SusiLVDSSetGPIO7High",
-    "?SusiLVDSSetGPIO7LOW",    
+    "?SusiLVDSSetGPIO7LOW",
+    "?SusiLVDSSetGPIO8High",
+    "?SusiLVDSSetGPIO8LOW",    
     NULL
 };
 
@@ -90,10 +90,10 @@ static const AJ_InterfaceDescription EventsAndActionsInterfaces[] =
 #define EVENTS_LVDSBRIGHTNESSLESS4_SLS                           AJ_ENCODE_MESSAGE_ID(AJAPP_OBJECTS_LIST_INDEX, EVENTSANDACTIONS_OBJECT_INDEX, 1, 4)
 
 #define ACTIONS_VERSION_PROP                                    AJ_ENCODE_PROPERTY_ID(AJAPP_OBJECTS_LIST_INDEX, EVENTSANDACTIONS_OBJECT_INDEX, 2, 0)
-#define ACTIONS_SUSI_GPIO6_SET_LEVLEHIGH												AJ_ENCODE_MESSAGE_ID(AJAPP_OBJECTS_LIST_INDEX, EVENTSANDACTIONS_OBJECT_INDEX, 2, 1)
-#define ACTIONS_SUSI_GPIO6_SET_LEVLELOW													AJ_ENCODE_MESSAGE_ID(AJAPP_OBJECTS_LIST_INDEX, EVENTSANDACTIONS_OBJECT_INDEX, 2, 2)
-#define ACTIONS_SUSI_GPIO7_SET_LEVLEHIGH												AJ_ENCODE_MESSAGE_ID(AJAPP_OBJECTS_LIST_INDEX, EVENTSANDACTIONS_OBJECT_INDEX, 2, 3)
-#define ACTIONS_SUSI_GPIO7_SET_LEVLELOW													AJ_ENCODE_MESSAGE_ID(AJAPP_OBJECTS_LIST_INDEX, EVENTSANDACTIONS_OBJECT_INDEX, 2, 4)
+#define ACTIONS_SUSI_GPIO7_SET_LEVLEHIGH												AJ_ENCODE_MESSAGE_ID(AJAPP_OBJECTS_LIST_INDEX, EVENTSANDACTIONS_OBJECT_INDEX, 2, 1)
+#define ACTIONS_SUSI_GPIO7_SET_LEVLELOW													AJ_ENCODE_MESSAGE_ID(AJAPP_OBJECTS_LIST_INDEX, EVENTSANDACTIONS_OBJECT_INDEX, 2, 2)
+#define ACTIONS_SUSI_GPIO8_SET_LEVLEHIGH												AJ_ENCODE_MESSAGE_ID(AJAPP_OBJECTS_LIST_INDEX, EVENTSANDACTIONS_OBJECT_INDEX, 2, 3)
+#define ACTIONS_SUSI_GPIO8_SET_LEVLELOW													AJ_ENCODE_MESSAGE_ID(AJAPP_OBJECTS_LIST_INDEX, EVENTSANDACTIONS_OBJECT_INDEX, 2, 4)
 
 #define EVENTSANDACTIONS_OBJECT_ID                              EVENTSANDACTIONS_OBJECT_INDEX
 
@@ -106,10 +106,10 @@ static const AJ_InterfaceDescription EventsAndActionsInterfaces[] =
 #define EVENTS_LVDSBRIGHTNESSLESS4_SLS_DESC                      AJ_DESCRIPTION_ID(EVENTSANDACTIONS_OBJECT_ID, 2, 5, 0)
 
 #define ACTIONS_INTERFACE_DESC                                  AJ_DESCRIPTION_ID(EVENTSANDACTIONS_OBJECT_ID, 3, 0, 0)
-#define ACTIONS_SUSI_GPIO6_SET_LEVLEHIGH_DESC										AJ_DESCRIPTION_ID(EVENTSANDACTIONS_OBJECT_ID, 3, 2, 0)
-#define ACTIONS_SUSI_GPIO6_SET_LEVLELOW_DESC										AJ_DESCRIPTION_ID(EVENTSANDACTIONS_OBJECT_ID, 3, 3, 0)
-#define ACTIONS_SUSI_GPIO7_SET_LEVLEHIGH_DESC										AJ_DESCRIPTION_ID(EVENTSANDACTIONS_OBJECT_ID, 3, 4, 0)
-#define ACTIONS_SUSI_GPIO7_SET_LEVLELOW_DESC										AJ_DESCRIPTION_ID(EVENTSANDACTIONS_OBJECT_ID, 3, 5, 0)
+#define ACTIONS_SUSI_GPIO7_SET_LEVLEHIGH_DESC										AJ_DESCRIPTION_ID(EVENTSANDACTIONS_OBJECT_ID, 3, 2, 0)
+#define ACTIONS_SUSI_GPIO7_SET_LEVLELOW_DESC										AJ_DESCRIPTION_ID(EVENTSANDACTIONS_OBJECT_ID, 3, 3, 0)
+#define ACTIONS_SUSI_GPIO8_SET_LEVLEHIGH_DESC										AJ_DESCRIPTION_ID(EVENTSANDACTIONS_OBJECT_ID, 3, 4, 0)
+#define ACTIONS_SUSI_GPIO8_SET_LEVLELOW_DESC										AJ_DESCRIPTION_ID(EVENTSANDACTIONS_OBJECT_ID, 3, 5, 0)
 
 #define DESCRIPTION_LENGTH 64
 char description[DESCRIPTION_LENGTH] = "";
@@ -178,17 +178,17 @@ static const char* DescriptionLookup(uint32_t descId, const char* lang)
 #endif
             return description;
 
-        case (ACTIONS_SUSI_GPIO6_SET_LEVLEHIGH_DESC):
-            return "set high level of GPIO6";
-
-        case (ACTIONS_SUSI_GPIO6_SET_LEVLELOW_DESC):
-            return "set low level of GPIO6";
-
         case (ACTIONS_SUSI_GPIO7_SET_LEVLEHIGH_DESC):
             return "set high level of GPIO7";
 
         case (ACTIONS_SUSI_GPIO7_SET_LEVLELOW_DESC):
             return "set low level of GPIO7";
+
+        case (ACTIONS_SUSI_GPIO8_SET_LEVLEHIGH_DESC):
+            return "set high level of GPIO8";
+
+        case (ACTIONS_SUSI_GPIO8_SET_LEVLELOW_DESC):
+            return "set low level of GPIO8";
 
         default:
             return NULL;
@@ -287,7 +287,7 @@ AJSVC_ServiceStatus EventsAndActionsMessageProcessor(AJ_BusAttachment* busAttach
         *msgStatus = AJ_BusPropSet(msg, EventsAndActionsPropSetHandler, NULL);
         break;
 
-		case ACTIONS_SUSI_GPIO6_SET_LEVLEHIGH:				
+		case ACTIONS_SUSI_GPIO7_SET_LEVLEHIGH:				
         AJ_MarshalReplyMsg(msg, &reply);
         AJ_SusiGPIOSetDirection(6, 1, SUSI_GPIO_OUTPUT);
         AJ_SusiGPIOGetDirection(6,1,&temp_dir);
@@ -295,7 +295,7 @@ AJSVC_ServiceStatus EventsAndActionsMessageProcessor(AJ_BusAttachment* busAttach
         AJ_SusiGPIOGetLevel(6,1,&temp_level);
         *msgStatus = AJ_DeliverMsg(&reply);				
         break;
-		case ACTIONS_SUSI_GPIO6_SET_LEVLELOW:			
+		case ACTIONS_SUSI_GPIO7_SET_LEVLELOW:			
 				AJ_MarshalReplyMsg(msg, &reply);
         AJ_SusiGPIOSetDirection(6, 1, SUSI_GPIO_OUTPUT);
         AJ_SusiGPIOGetDirection(6,1,&temp_dir);
@@ -304,7 +304,7 @@ AJSVC_ServiceStatus EventsAndActionsMessageProcessor(AJ_BusAttachment* busAttach
         *msgStatus = AJ_DeliverMsg(&reply);
 				break;
 
-		case ACTIONS_SUSI_GPIO7_SET_LEVLEHIGH:				
+		case ACTIONS_SUSI_GPIO8_SET_LEVLEHIGH:				
         AJ_MarshalReplyMsg(msg, &reply);
         AJ_SusiGPIOSetDirection(7, 1, SUSI_GPIO_OUTPUT);
         AJ_SusiGPIOGetDirection(7,1,&temp_dir);
@@ -312,7 +312,7 @@ AJSVC_ServiceStatus EventsAndActionsMessageProcessor(AJ_BusAttachment* busAttach
         AJ_SusiGPIOGetLevel(7,1,&temp_level);
         *msgStatus = AJ_DeliverMsg(&reply);				
         break;
-		case ACTIONS_SUSI_GPIO7_SET_LEVLELOW:			
+		case ACTIONS_SUSI_GPIO8_SET_LEVLELOW:			
 				AJ_MarshalReplyMsg(msg, &reply);
         AJ_SusiGPIOSetDirection(7, 1, SUSI_GPIO_OUTPUT);
         AJ_SusiGPIOGetDirection(7,1,&temp_dir);

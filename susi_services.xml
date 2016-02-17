@@ -189,25 +189,25 @@
                                     <constraintVals>
                                         <constraint>
                                             <display>
-                                                <value type="literal" language="en">HDMI</value>
+                                                <value type="literal" language="en">FB0</value>
                                             </display>
                                             <value>0</value>
                                         </constraint>
                                         <constraint>
                                             <display>
-                                                <value type="literal" language="en">VGA</value>
+                                                <value type="literal" language="en">FB1</value>
                                             </display>
                                             <value>1</value>
                                         </constraint>
                                         <constraint>
                                             <display>
-                                                <value type="literal" language="en">LVDS_1</value>
+                                                <value type="literal" language="en">FB2</value>
                                             </display>
                                             <value>2</value>
                                         </constraint>
                                         <constraint>
                                             <display>
-                                                <value type="literal" language="en">LVDS_2</value>
+                                                <value type="literal" language="en">FB3</value>
                                             </display>
                                             <value>3</value>
                                         </constraint>                                                                                                                          

@@ -576,10 +576,11 @@ void setSubscription(uint32_t newValue)
 }
 ////////////////////////////////////////////////////////////////
 
+/*
 void disableBrightness()
 {
 		setBaseEnabled(&SUSIAccessBrightnessProperty.base, FALSE);
-		setBaseWritable(&SUSIAccessBrightnessProperty.base, FALSE);	
+		setBaseWritable(&SUSIAccessBrightnessProperty.base, FALSE);
 }
 
 void enableBrightness()
@@ -587,7 +588,7 @@ void enableBrightness()
 		setBaseEnabled(&SUSIAccessBrightnessProperty.base, TRUE);
 		setBaseWritable(&SUSIAccessBrightnessProperty.base, TRUE);
 }
-
+*/
 void disableGPIOLevel()
 {
 	  setBaseEnabled(&SUSIAccessGPIOLevelProperty.base, FALSE);
@@ -628,34 +629,45 @@ uint8_t checkForUpdatesToSend()
 		AJ_SusiVgaGetBacklightBrightness(display_sel_dev, &blightness_value);
 		AJ_SusiGPIOGetDirection(selected_gpio, gpio_mask, &gpio_dir);
 		AJ_SusiGPIOGetLevel(selected_gpio, gpio_mask, &gpio_level);		
-	
+
+
 		if (display_sel_dev != display_pre_dev)
 		{
+/*
 				switch (display_sel_dev)
 				{
 						case 0://HDMI
 						case 1://VGA
 										disableBrightness();
-										break;	
+										break;
 						default://LVDS1,LVDS2
 										enableBrightness();
-										break;			
+										break;
 				}
+*/
 				setBlacklightPropertyUpdate();
 				display_pre_dev = display_sel_dev;
 		}
 		
-		if ((backlight_value != backlight_pre_value) || (blightness_value != brightness_pre_value))
+		if (backlight_value != backlight_pre_value)
+    {
+    		setDisplayOptionUpdate();
+        backlight_pre_value = backlight_value;
+    }
+    else if (blightness_value != brightness_pre_value)
 		{
 				setDisplayOptionUpdate();
-				backlight_pre_value = backlight_value;
 				brightness_pre_value = blightness_value;
 		}
 		
-		if ((gpio_dir != gpio_pre_dir) || (gpio_level != gpio_pre_level))
+		if (gpio_dir != gpio_pre_dir)
+    {
+    		setGPIOOptionUpdate();
+				gpio_pre_dir = gpio_dir;
+    }
+    else if (gpio_level != gpio_pre_level)
 		{		
 				setGPIOOptionUpdate();
-				gpio_pre_dir = gpio_dir;
 				gpio_pre_level = gpio_level;
 		}
 
@@ -696,12 +708,12 @@ uint8_t checkForEventsToSend()
 				backlight_flag = 0;
     }
     
-    if((blightness_value <= 4) && brightness_flag == 0)
+    if((blightness_value > 4) && brightness_flag == 0)
   	{
 	  		setGPIO7HighEvent();
 	  		brightness_flag = 1;
   	}
-  	else if ((blightness_value > 4) && brightness_flag == 1)
+  	else if ((blightness_value <= 4) && brightness_flag == 1)
   	{
 	  		setGPIO7LowEvent();
 	  		brightness_flag = 0;

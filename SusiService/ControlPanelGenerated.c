@@ -101,13 +101,13 @@ static const char* const SUSIAccessDisplayDevicePropertyLabel[] = { "Display Dev
 static const uint16_t SUSIAccessDisplayDevicePropertyHints[] = { PROPERTY_WIDGET_HINT_SPINNER };
 static ConstraintList SUSIAccessDisplayDevicePropertyConstraintList[4];
 static const uint16_t SUSIAccessDisplayDevicePropertyConstraintValue0 = 0;
-static const char* const SUSIAccessDisplayDevicePropertyDisplay0[] = { "HDMI" };
+static const char* const SUSIAccessDisplayDevicePropertyDisplay0[] = { "FB0" };
 static const uint16_t SUSIAccessDisplayDevicePropertyConstraintValue1 = 1;
-static const char* const SUSIAccessDisplayDevicePropertyDisplay1[] = { "VGA" };
+static const char* const SUSIAccessDisplayDevicePropertyDisplay1[] = { "FB1" };
 static const uint16_t SUSIAccessDisplayDevicePropertyConstraintValue2 = 2;
-static const char* const SUSIAccessDisplayDevicePropertyDisplay2[] = { "LVDS_1" };
+static const char* const SUSIAccessDisplayDevicePropertyDisplay2[] = { "FB2" };
 static const uint16_t SUSIAccessDisplayDevicePropertyConstraintValue3 = 3;
-static const char* const SUSIAccessDisplayDevicePropertyDisplay3[] = { "LVDS_2" };
+static const char* const SUSIAccessDisplayDevicePropertyDisplay3[] = { "FB3" };
 static const char* const SUSIAccessBrightnessPropertySignature = "q";
 static const char* const SUSIAccessBrightnessPropertyLabel[] = { "Brightness" };
 static const uint16_t SUSIAccessBrightnessPropertyHints[] = { PROPERTY_WIDGET_HINT_SLIDER };
